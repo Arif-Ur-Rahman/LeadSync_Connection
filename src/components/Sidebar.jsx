@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaHome, FaChartBar, FaCog, FaUser, FaEnvelope, FaProjectDiagram, FaAngleUp, FaAngleDown } from "react-icons/fa"; // Icons
 import { AiOutlineTeam } from "react-icons/ai";
 import logo from '../assets/logo/lead.png';
-import user from '../assets/users/user1.png';
+import user from '../assets/users/Untitled design (7).png';
 
 function Sidebar() {
   // State to track which menu is expanded
