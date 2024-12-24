@@ -1,7 +1,8 @@
 import React from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
-import CampaignTable from './components/CampaignTable';
+import Connections from './components/Connections';
+
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Header />
-        <CampaignTable />
+        <Connections />
+        
       </div>
     </div>
   );
