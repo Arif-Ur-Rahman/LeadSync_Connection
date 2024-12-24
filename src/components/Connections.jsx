@@ -1,17 +1,34 @@
-import React from "react";
-import { BsLinkedin, BsThreeDotsVertical } from "react-icons/bs";
+import React, { useState } from "react";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaLinkedinIn } from "react-icons/fa";
-import { FiFilter } from "react-icons/fi";
 import { RiMenu5Fill } from "react-icons/ri";
+import { FiChevronDown, FiChevronRight, FiChevronUp, FiSearch } from "react-icons/fi";
+import arif2 from "../assets/users/Untitled design (7).png";
 
 function Connections() {
-  function Switch() {
-    const [isOn, setIsOn] = useState(false);
+  const [showCompanyDropdown, setShowCompanyDropdown] = useState(false);
+  const [showJobTitleDropdown, setShowJobTitleDropdown] = useState(false);
+  const [companySearch, setCompanySearch] = useState("");
+  const [jobTitleSearch, setJobTitleSearch] = useState("");
 
-    const handleToggle = () => {
-      setIsOn(!isOn);
-    };
-  }
+  const companyList = ["Grow Connection", "Real Estate", "Campaign Growth"];
+  const jobTitleList = ["Designer", "Product Manager", "Engineer", "UX Researcher"];
+
+  const filteredCompanies = companyList.filter((company) =>
+    company.toLowerCase().includes(companySearch.toLowerCase())
+  );
+
+  const filteredJobTitles = jobTitleList.filter((title) =>
+    title.toLowerCase().includes(jobTitleSearch.toLowerCase())
+  );
+
+  const toggleCompanyDropdown = () => {
+    setShowCompanyDropdown(!showCompanyDropdown);
+  };
+
+  const toggleJobTitleDropdown = () => {
+    setShowJobTitleDropdown(!showJobTitleDropdown);
+  };
 
   return (
     <div className="flex bg-gray-100 min-h-screen p-4">
@@ -24,40 +41,105 @@ function Connections() {
           </div>
           <button className="text-sm text-blue-500">View all</button>
         </div>
-        <div className="mb-6 flex items-center justify-between">
-          <h3 className="text-sm font-medium">Job Title</h3>
-          <div className="flex items-center space-x-4">
-            <span className="text-sm bg-gray-500 px-2 py-1 text-white rounded-full">
-              3
-            </span>
-            <button className="text-sm text-red-500 flex items-center">
-              Clear all
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="w-4 h-4 ml-1"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
+
+        {/* Company Dropdown */}
+        <div className="mb-6">
+          <div
+            className="flex items-center justify-between cursor-pointer"
+            onClick={toggleCompanyDropdown}
+          >
+            <h3 className="text-sm font-medium">Company</h3>
+            {showCompanyDropdown ? (
+              <FiChevronUp className="text-lg text-gray-500" />
+            ) : (
+              <FiChevronRight className="text-lg text-gray-500" />
+            )}
           </div>
+
+          {showCompanyDropdown && (
+            <div className="mt-4 bg-gray-100 p-3 rounded-lg shadow-md">
+              <div className="flex items-center mb-3">
+                <FiSearch className="text-gray-400 w-5 h-5 absolute ml-3" />
+                <input
+                  type="text"
+                  placeholder="Search company"
+                  value={companySearch}
+                  onChange={(e) => setCompanySearch(e.target.value)}
+                  className="w-full pl-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <ul className="space-y-2">
+                {filteredCompanies.length > 0 ? (
+                  filteredCompanies.map((company, index) => (
+                    <li key={index} className="text-sm flex items-center">
+                      <input
+                        type="radio"
+                        name="company"
+                        id={`company-${index}`}
+                        className="mr-2"
+                      />
+                      <label htmlFor={`company-${index}`} className="cursor-pointer">
+                        {company}
+                      </label>
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-sm text-gray-500">No results found</li>
+                )}
+              </ul>
+              <button className="text-blue-500 text-sm mt-3">Show all →</button>
+            </div>
+          )}
         </div>
 
-        <div className="mb-6 flex items-center justify-between">
-          <h3 className="text-sm font-medium">Company</h3>
-          <button className="text-lg text-gray-500">›</button>
-        </div>
+        {/* Job Title Dropdown */}
+        <div className="mb-6">
+          <div
+            className="flex items-center justify-between cursor-pointer"
+            onClick={toggleJobTitleDropdown}
+          >
+            <h3 className="text-sm font-medium">Job Title</h3>
+            {showJobTitleDropdown ? (
+              <FiChevronUp className="text-lg text-gray-500" />
+            ) : (
+              <FiChevronRight className="text-lg text-gray-500" />
+            )}
+          </div>
 
-        <div className="mb-6 flex items-center justify-between">
-          <h3 className="text-sm font-medium">Job Title</h3>
-          <button className="text-lg text-gray-500">›</button>
+          {showJobTitleDropdown && (
+            <div className="mt-4 bg-gray-100 p-3 rounded-lg shadow-md">
+              <div className="flex items-center mb-3">
+                <FiSearch className="text-gray-400 w-5 h-5 absolute ml-3" />
+                <input
+                  type="text"
+                  placeholder="Search job title"
+                  value={jobTitleSearch}
+                  onChange={(e) => setJobTitleSearch(e.target.value)}
+                  className="w-full pl-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+              <ul className="space-y-2">
+                {filteredJobTitles.length > 0 ? (
+                  filteredJobTitles.map((title, index) => (
+                    <li key={index} className="text-sm flex items-center">
+                      <input
+                        type="radio"
+                        name="jobTitle"
+                        id={`jobTitle-${index}`}
+                        className="mr-2"
+                      />
+                      <label htmlFor={`jobTitle-${index}`} className="cursor-pointer">
+                        {title}
+                      </label>
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-sm text-gray-500">No results found</li>
+                )}
+              </ul>
+              <button className="text-blue-500 text-sm mt-3">Show all →</button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -82,7 +164,7 @@ function Connections() {
               {/* Left Section */}
               <div className="flex items-center">
                 <img
-                  src="https://via.placeholder.com/50"
+                  src={arif2}
                   alt="profile"
                   className="w-12 h-12 rounded-full"
                 />

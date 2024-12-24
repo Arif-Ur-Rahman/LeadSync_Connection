@@ -1,5 +1,5 @@
 import React from 'react';
-import user1 from '../assets/users/user1.png'
+import user1 from '../assets/users/Untitled design (7).png'
 import { MdOutlineHeadsetMic } from 'react-icons/md';
 
 function Header() {
