@@ -5,7 +5,7 @@ import { MdOutlineHeadsetMic } from 'react-icons/md';
 function Header() {
   return (
     <div className="flex justify-between items-center p-4 bg-white border-b">
-      <h1 className="text-xl font-semibold">Campaign</h1>
+      <h1 className="text-xl font-semibold">Connections</h1>
       <div className="flex items-center">
         <span className="mr-4"><MdOutlineHeadsetMic /></span>
         <img
